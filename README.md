@@ -32,17 +32,37 @@ Except for the final layer, all other layers use leaky ReLU as activation functi
 ![image](https://github.com/shehab-ashraf/You-Only-Look-Once/assets/61033121/a7fc5ff9-1f9a-493b-bfea-097aa488c84c)
 
 #### Loss Function
-There are more than one  term in the loss function
+There are more than one  term in the loss function and all of these losses are going to be sum-squared-error :
 
-![image](https://github.com/shehab-ashraf/You-Only-Look-Once/assets/61033121/7e5b9fc6-042c-46b9-9714-61cd34eb9897)
+1. midpoint loss, we take the midpoint x-value subtracting with the predicted and taking that squared plus the y-value minus 
+   y-predicted and again taking that squared and we will do that if there's and object in the cell i and also if the bounding box j if responsible for outputting that
+   bounding box.
+   
+   ![image](https://github.com/shehab-ashraf/You-Only-Look-Once/assets/61033121/34246f23-5601-48dc-bdd1-5bbc0b4e89c9)
 
-1. (x, y): The bounding box x and y coordinates is parametrized to be offsets of a particular grid cell location so they are also bounded between 0 and 1. And the sum of square 
-   error (SSE) is estimated only when there is object.
-2. (w, h): The bounding box width and height are normalized by the image width and height so that they fall between 0 and 1. SSE is estimated only when there is object. Since small 
-   deviations in large boxes matter less than in small boxes. square root of the bounding box width w and height h instead of the width and height directly to partially address this 
-   problem.
-3. (The confidence): the IOU between the predicted box and any ground truth box
-4. (Class Probabilities): SSE of class probabilities when there is objects.
+2. for the width and hight losses we do the same thing pretty much, we have the width minus the width prediction squared the only difference here is
+   that we have the square root, let's say we have a very large bounding box and we take those subtract and we take it squared for very large
+   bounding boxes that squared is going to become very large but for small bounding boxes the losses not going to be as large if you would have
+   a large bounding box so, what they do is that they take the square root to make sure that we prioritize smaller bounding boxes equally much
+   as we do for large bounding boxes.
+
+   ![image](https://github.com/shehab-ashraf/You-Only-Look-Once/assets/61033121/f234f30a-83d9-47ae-88a6-f8e5d521a5c4)
+
+
+3. probability that there's a box in the cell.
+
+   ![image](https://github.com/shehab-ashraf/You-Only-Look-Once/assets/61033121/edc511bf-6c2c-42b9-a91f-124d50efddaf)
+
+4. if no object in a cell.
+
+   ![image](https://github.com/shehab-ashraf/You-Only-Look-Once/assets/61033121/cb882747-8f9f-4eaa-a69d-ced6efae7b85)
+
+5. classes loss to make sure that we actually can say what object is in this cell. we do this for each cell, we look if there is an object here
+   and then go through each class and again we take the sum-squared-error.
+
+   ![image](https://github.com/shehab-ashraf/You-Only-Look-Once/assets/61033121/ca48cf33-b6cc-4a83-a421-5957f2930c8b)
+
+
 
 #### Reference
 1. [2016 CVPR] [YOLOv1] [You Only Look Once: Unified, Real-Time Object Detection](https://arxiv.org/abs/1506.02640)
