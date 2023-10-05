@@ -64,6 +64,11 @@ There are more than one  term in the loss function and all of these losses are g
    
 
 #### Results
+<img src="https://github.com/shehab-ashraf/You-Only-Look-Once/assets/61033121/16643c15-5900-49aa-b994-524ff37e12e1" width="200" />
+<img src="https://github.com/shehab-ashraf/You-Only-Look-Once/assets/61033121/c864c6bc-8589-497f-b209-e9660d339f2d" width="200" />
+<img src="https://github.com/shehab-ashraf/You-Only-Look-Once/assets/61033121/49b6c05d-c9ea-4553-9236-d82cd762ebb2" width="200" />
+
+
 
 #### Limitations of YOLO
 YOLO can only predict a limited number of bounding boxes per grid cell, 2 in the original research paper. And though that number can be increased, only one class prediction can be made per cell, limiting the detections when multiple objects appear in a single grid cell. Thus, it struggles with bounding groups of small objects, such as flocks of birds, or multiple small objects of different classes.
